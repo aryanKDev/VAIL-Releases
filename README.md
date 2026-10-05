@@ -10,22 +10,25 @@ This repository is the **official public release repository** for VAIL. Applicat
 
 ---
 
-## 🚀 Latest Release — VAIL 1.0.1
+## 🚀 Latest Release — VAIL 1.0.2
 
-**Release tag:** `v1.0.1`  
-**Version code:** `3`  
+**Release tag:** `v1.0.2`  
+**Version code:** `4`  
 **Minimum Android:** Android 8.0+ (API 26)  
 **Target SDK:** API 36  
 **Release type:** Production-signed APK
 
-### What's new in 1.0.1
+### What's new in 1.0.2
 
 - ✅ **Batch MOVE confirmation** — moving multiple photos and videos now uses a single Android deletion confirmation where supported, instead of asking once per file.
 - ✅ **Album filters** — Album Detail now supports **All / Photos / Videos**.
 - ✅ **Safer MOVE workflow** — VAIL verifies the encrypted copies before the original media is touched.
 - ✅ **Improved filtered selection** — changing the album filter clears the current selection so actions apply only to the currently visible media.
+- ✅ **Scoped Media Viewer navigation** — opening media from a filtered album now keeps viewer navigation within the active **All / Photos / Videos** filter.
+- ✅ **Viewer navigation fix** — photos and videos no longer appear outside the selected filter while swiping.
+- ✅ **Improved single-item handling** — filtered albums with one item no longer allow invalid next/previous navigation.
 
-[**Download VAIL 1.0.1 →**](../../releases/tag/v1.0.1)
+[**Download VAIL 1.0.2 →**](../../releases/tag/v1.0.2)
 
 ---
 
@@ -33,9 +36,9 @@ This repository is the **official public release repository** for VAIL. Applicat
 
 Download the latest official VAIL APK directly from the GitHub Releases page.
 
-### 🚀 VAIL 1.0.1
+### 🚀 VAIL 1.0.2
 
-[⬇️ **Download VAIL 1.0.1 APK**](https://github.com/aryanKDev/VAIL-Releases/releases/download/v1.0.1/app-release.apk)
+[⬇️ **Download VAIL 1.0.2 APK**](https://github.com/aryanKDev/VAIL-Releases/releases/download/v1.0.2/app-release.apk)
 
 Or view all available releases:
 
@@ -44,7 +47,7 @@ Or view all available releases:
 ### Installation
 
 1. Download the APK using the link above.
-2. Open the downloaded `VAIL-v1.0.1.apk` file on your Android device.
+2. Open the downloaded `app-release.apk` file on your Android device.
 3. Approve Android's installation prompt.
 4. Launch VAIL and unlock your vault.
 
@@ -362,19 +365,19 @@ Recovery and backup workflows are intended to keep the user in control of the in
 
 ---
 
-# ✅ VAIL 1.0.1 Validation
+# ✅ VAIL 1.0.2 Validation
 
-VAIL 1.0.1 was tested through automated checks and real-device verification.
+VAIL 1.0.2 was verified through automated checks and targeted real-device update verification.
 
 ### Automated tests
 
 - **TypeScript:** PASS
-- **Jest:** 84/84 tests passed
-- **Android unit tests:** 89/89 tests passed
+- **Jest:** 93/93 tests passed
+- **Android unit tests:** PASS
 
 ### Real-device verification
 
-The production 1.0.1 APK was installed as an update on an Android 15 Vivo test device without uninstalling the existing app.
+The production 1.0.2 build was verified through automated checks and the latest debug update was installed in-place on an Android 15 Vivo test device without uninstalling the existing app.
 
 Verified:
 
@@ -382,6 +385,7 @@ Verified:
 - ✅ Existing vault data preserved.
 - ✅ Existing encrypted media and albums accessible.
 - ✅ All / Photos / Videos album filters working.
+- ✅ Filtered Media Viewer navigation stays within the active filter.
 - ✅ Multi-item MOVE uses a single confirmation where supported.
 - ✅ No crash during the final verification flow.
 
@@ -422,6 +426,7 @@ The objective is a strong, practical, privacy-oriented encrypted vault with user
 
 | Version | Highlights |
 |---|---|
+| **1.0.2** | Scoped Album Media Viewer navigation, filtered viewer fixes, improved single-item navigation handling |
 | **1.0.1** | Batch MOVE confirmation, Album All/Photos/Videos filters, safer MOVE verification, improved filtered selection |
 | **1.0.0** | Initial production release of the VAIL encrypted media vault |
 
