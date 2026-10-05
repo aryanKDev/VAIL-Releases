@@ -2,54 +2,84 @@
 
 ## Encrypted Media Vault for Android
 
-VAIL is a **local-first encrypted media vault for Android** designed to keep personal photos and videos inside a private, encrypted vault while giving the user direct control over importing, viewing, organizing, backing up, restoring, and migrating their data.
+VAIL is a **local-first encrypted media vault for Android** built for people who want private photos and videos stored inside an encrypted vault with practical tools for viewing, organizing, backing up, recovering, and moving their data.
 
-VAIL is built around a simple idea:
+> **Keep your media private. Keep control in your hands.**
 
-> **Your media should remain yours, locally and under your control.**
-
-The public `VAIL-Releases` repository contains official Android release builds. The application source repository is maintained separately.
+This repository is the **official public release repository** for VAIL. Application source code is maintained separately.
 
 ---
 
-## ✨ Current Release
-
-### VAIL 1.0.1
+## 🚀 Latest Release — VAIL 1.0.1
 
 **Release tag:** `v1.0.1`  
 **Version code:** `3`  
 **Minimum Android:** Android 8.0+ (API 26)  
-**Target Android:** API 36  
-**Release type:** Production signed release
+**Target SDK:** API 36  
+**Release type:** Production-signed APK
 
 ### What's new in 1.0.1
 
-- ✅ **Batch MOVE confirmation** — moving multiple photos/videos now uses a single Android deletion confirmation instead of asking once per file.
-- ✅ **Album media filters** — Album Detail now supports **All / Photos / Videos** filtering.
-- ✅ **Improved filtered selection flow** — changing the album filter clears the current selection so actions always apply to the visible media set.
-- ✅ **Safer MOVE handling** — encrypted copies are verified before the original media is touched.
+- ✅ **Batch MOVE confirmation** — moving multiple photos and videos now uses a single Android deletion confirmation where supported, instead of asking once per file.
+- ✅ **Album filters** — Album Detail now supports **All / Photos / Videos**.
+- ✅ **Safer MOVE workflow** — VAIL verifies the encrypted copies before the original media is touched.
+- ✅ **Improved filtered selection** — changing the album filter clears the current selection so actions apply only to the currently visible media.
+
+[**Download VAIL 1.0.1 →**](../../releases/tag/v1.0.1)
 
 ---
 
-## 📥 Download
+# 📥 Download & Install
 
-Download the latest APK from the **Releases** section of this repository.
+Download the latest official VAIL APK directly from the GitHub Releases page.
 
-### Direct APK
+### 🚀 VAIL 1.0.1
 
-The latest release provides a production-signed APK for direct Android installation.
+[⬇️ **Download VAIL 1.0.1 APK**](https://github.com/aryanKDev/VAIL-Releases/releases/latest/download/VAIL-v1.0.1.apk)
 
-**Recommended:** download the asset named `VAIL-v1.0.1.apk` from the `v1.0.1` release.
+Or view all available releases:
 
-> Android may show a warning when installing an APK downloaded outside Google Play. This is expected for direct distribution. Only install builds downloaded from the official VAIL release repository.
+[📦 **View All Releases**](https://github.com/aryanKDev/VAIL-Releases/releases)
+
+### Installation
+
+1. Download the APK using the link above.
+2. Open the downloaded `VAIL-v1.0.1.apk` file on your Android device.
+3. Approve Android's installation prompt.
+4. Launch VAIL and unlock your vault.
+
+### ⚠️ About APK Installation
+
+Because VAIL is currently distributed directly as an APK rather than through Google Play, Android may show a warning about installing an app from an external source. This is normal for a sideloaded APK.
+
+For safety, download VAIL only from this official release repository:
+
+[🔐 **Official VAIL Releases**](https://github.com/aryanKDev/VAIL-Releases/releases)
+
+> **Important:** When updating VAIL, install the new APK over the existing installation.  
+> Do **not uninstall VAIL first** if you need your existing local vault data to remain available.
+
+# 🔄 Updating VAIL
+
+VAIL is designed to support normal Android updates when the new build is signed with the same application signing identity.
+
+To update:
+
+1. Download the newer APK from the official **Releases** page.
+2. Open it on the device where VAIL is already installed.
+3. Choose **Update / Install** when Android prompts you.
+4. Open VAIL and unlock the vault.
+5. Verify your media and albums after the update.
+
+> **Do not uninstall VAIL before updating** if you need the existing local vault data to remain available. Uninstalling an Android app can remove its private application storage.
 
 ---
 
-## 🧭 What is VAIL?
+# 🧭 What is VAIL?
 
-VAIL is not a cloud photo gallery and not a social media application. It is a **private local-first media vault** intended for personal use.
+VAIL is a **private, local-first media vault**. It is designed around keeping protected media inside an encrypted local vault rather than turning the app into another cloud photo gallery.
 
-The core workflow is:
+The main flow is:
 
 ```text
 Device Gallery
@@ -57,7 +87,7 @@ Device Gallery
       ▼
   Import Media
       │
-      ├── COPY ──► Encrypted copy stays inside VAIL
+      ├── COPY ──► Encrypted copy stored in VAIL
       │
       └── MOVE ──► Encrypted copy verified ──► original removed
       │
@@ -66,257 +96,229 @@ Device Gallery
       │
       ├── Gallery
       ├── Albums
-      ├── Photos / Videos viewer
+      ├── Photo / Video Viewer
       ├── Recycle Bin
-      └── Backups / Restore / Migration
+      └── Backup / Restore / Migration
 ```
-
-VAIL is designed so that the encrypted vault remains the primary storage area for protected media while the user controls when content is imported, restored, moved, or permanently deleted.
 
 ---
 
-# 🔐 Security Architecture
+# ✨ Features
 
-VAIL uses multiple security layers rather than relying on a single protection mechanism.
-
-## Encryption
-
-- **AES-256-GCM** for media/data encryption.
-- Unique file encryption keys are used in the vault architecture.
-- Encrypted content is stored locally rather than as ordinary gallery files.
-
-## Key Derivation
-
-- **Argon2id** is used for key derivation where supported by the application security layer.
-- A **PBKDF2-HMAC-SHA512 fallback** is available for compatibility.
-
-## Android Keystore
-
-VAIL integrates with the **Android Keystore** for hardware-backed key protection where available.
-
-The implementation can use:
-
-- **StrongBox** when the device supports it.
-- **TEE-backed Keystore** on compatible devices when StrongBox is unavailable.
-
-## PIN / Vault Protection
-
-VAIL protects access to the vault using an application-controlled PIN flow with additional anti-brute-force behavior.
-
-Implemented protections include:
+## 🔐 Secure Vault
 
 - PIN-protected vault access.
-- Lockout behavior after repeated failed attempts.
+- Biometric unlock support on compatible devices.
 - Auto-lock.
-- Secure lock screen behavior.
-- Screenshot protection via Android `FLAG_SECURE`.
-- Release builds use R8 code shrinking/obfuscation.
+- Failed-attempt lockout behavior.
+- Secure-screen protection to reduce screenshot and screen-capture exposure.
+- Local encrypted storage for protected media.
 
-## Recovery Key
+## 🖼️ Private Media Gallery
 
-VAIL includes a recovery-key flow based on a **BIP-39 mnemonic** so that vault recovery is not dependent only on remembering the normal application PIN.
+Browse photos and videos stored inside the encrypted vault using VAIL's internal gallery and viewer.
 
-The recovery material should be stored privately and securely by the user.
+VAIL focuses on **viewing and organizing protected media**. It is intentionally not a photo editor or video editor.
 
----
+## 📥 COPY & MOVE Import
 
-# 🗂️ Media & Vault Features
+Choose how imported media should behave.
 
-## 📥 Import Media
+### COPY
 
-Import photos and videos from the device media library into the encrypted vault.
+The original media remains in the normal device gallery while VAIL stores an encrypted copy inside the vault.
 
-### COPY mode
+### MOVE
 
-COPY keeps the original media in the normal device gallery while VAIL stores an encrypted copy inside the vault.
+VAIL first creates and verifies the encrypted vault copy. Only after successful verification does it request Android permission to remove the original.
 
-### MOVE mode
+For multi-item MOVE operations, VAIL requests a **single batch deletion confirmation where Android supports it**.
 
-MOVE is designed for users who want the protected copy to replace the original gallery copy.
-
-The MOVE pipeline follows a strict sequence:
-
-```text
-Copy encrypted media
-        ↓
-Verify encrypted copy
-        ↓
-Request Android deletion consent
-        ↓
-Delete original only after confirmation
-```
-
-For multiple selected items, VAIL uses a **single Android confirmation request** where the platform supports batch deletion.
-
-If the user cancels or denies the deletion request, the originals are left untouched.
+If the deletion request is cancelled or denied, the original media is left untouched.
 
 ---
 
-## 🖼️ Gallery
+# 📁 Albums
 
-VAIL provides an internal encrypted-media gallery for viewing protected content without exposing the encrypted vault files as normal gallery media.
+Organize vault media into albums and quickly filter the content you want to see.
 
-Features include:
+Album Detail supports:
 
-- Photo browsing.
-- Video browsing.
-- Multi-select.
-- Media actions.
-- Album organization.
+| Filter | Shows |
+|---|---|
+| **All** | Photos + videos |
+| **Photos** | Photos only |
+| **Videos** | Videos only |
 
----
+Additional behavior:
 
-## 📁 Albums
-
-VAIL supports album-based organization for vault media.
-
-Album Detail provides:
-
-- **All** media.
-- **Photos** only.
-- **Videos** only.
-- Photo/video counts.
-- Multi-selection using the currently filtered media set.
-- Empty states when a selected filter contains no media.
-
-Changing the filter does not mutate the underlying album data; it only changes what is displayed.
-
----
-
-## 🎞️ Media Viewer
-
-VAIL includes a dedicated internal media viewer for protected content.
-
-The project intentionally focuses on **viewing**, not editing. VAIL does not attempt to become a photo editor or video editor.
+- Media counts are shown for photos and videos.
+- Multi-selection works with the active filter.
+- Changing the filter clears the current selection.
+- Empty filter states tell you when no photos or videos match the selected filter.
+- Filtering changes the displayed view without changing the underlying album data.
 
 ---
 
 # 🗑️ Recycle Bin
 
-VAIL includes a Recycle Bin for deleted vault media.
+Deleted vault media can be managed through VAIL's Recycle Bin.
 
 Supported actions include:
 
-- Restore media.
-- Permanently delete media.
+- Restore deleted media.
+- Permanently delete items.
 - Automatic purge behavior for eligible items.
-- Cleanup of associated metadata and album references during permanent deletion.
+- Cleanup of related vault metadata and album references during permanent deletion.
 
-For MOVE operations, deletion of the original device media is separate from deletion of the encrypted vault copy.
-
----
-
-# ☁️ Backup & Restore
-
-VAIL supports encrypted backup and restore workflows, including Google Drive integration.
-
-## Encrypted backups
-
-Backups contain the information required to restore the encrypted vault while maintaining cryptographic integrity checks.
-
-The backup system includes:
-
-- Vault key envelope information.
-- Integrity verification.
-- Per-file SHA-256 verification.
-- Protection against restoring corrupted or tampered backup content.
-- Re-wrapping of file encryption keys where required by the restored vault context.
-
-The application validates backup integrity before making vault modifications.
-
-## Google Drive
-
-VAIL can use Google Drive for user-controlled encrypted backups.
-
-The Drive integration is intended for storing encrypted backup data. The backup itself remains encrypted by VAIL rather than being uploaded as ordinary photos and videos.
-
-> **Important:** a cloud backup is still only as secure as the account and credentials protecting that cloud storage. Enable strong account security and keep recovery information private.
+The Recycle Bin is separate from the Android device gallery. MOVE operations deal with the original device media independently from the encrypted vault copy.
 
 ---
 
-# 📱 Device Migration
+# ☁️ Encrypted Backup & Restore
 
-VAIL includes a phone-to-phone migration flow for moving encrypted vault data between compatible devices.
+VAIL supports encrypted backup and restore workflows, including **Google Drive** integration.
 
-The project uses a local migration protocol with:
+The backup system is designed to preserve the cryptographic information needed to recover the vault while validating backup integrity before making destructive changes.
 
-- ECDH P-256 key agreement.
-- HKDF-SHA256 key derivation.
-- Authentication / SAS verification.
+Key properties include:
+
+- Vault key envelope information for recovery.
 - HMAC-based integrity validation.
+- Per-file SHA-256 verification.
+- Validation before modifying the destination vault.
+- Re-wrapping of file encryption keys when required by the restored vault context.
 
-The migration flow is intended to prevent silent acceptance of an unexpected destination/device.
+### Google Drive
+
+VAIL can store encrypted backups in the user's Google Drive account.
+
+The cloud copy is intended to remain an **encrypted backup**, not a normal folder of viewable photos and videos.
+
+> Keep the Google account, VAIL PIN, and recovery information protected. Cloud storage security also depends on the security of the account controlling it.
 
 ---
 
-# 🕵️ Privacy / Stealth Features
+# 🔑 Recovery Key
 
-VAIL includes optional privacy-oriented features such as:
+VAIL provides a recovery-key flow based on a **BIP-39 mnemonic**.
+
+The recovery phrase is important for vault recovery and should be stored privately in a secure offline location.
+
+Do not share your recovery phrase with anyone.
+
+---
+
+# 📱 Phone-to-Phone Migration
+
+VAIL includes a local migration workflow for transferring an encrypted vault between compatible devices.
+
+The migration protocol uses cryptographic key agreement and integrity/authentication checks, including:
+
+- ECDH P-256
+- HKDF-SHA256
+- SAS verification
+- HMAC integrity validation
+
+The goal is to make the transfer explicit and verifiable rather than silently trusting an unexpected device.
+
+---
+
+# 🕵️ Privacy-Oriented Features
+
+VAIL includes additional privacy-focused controls such as:
 
 - **Decoy Vault** support.
 - **Panic Lock** behavior.
+- Calculator-style access flow with a hidden long-press unlock interaction.
 - Auto-lock.
 - Secure-screen protection.
-- A calculator-style access flow with a hidden long-press unlock interaction.
 
-These features are intended as privacy tools, not as a guarantee of invisibility or complete forensic resistance.
+These are privacy tools, not guarantees of invisibility or complete forensic resistance.
+
+---
+
+# 🛡️ Security Architecture
+
+VAIL uses several layers of protection rather than depending on one mechanism.
+
+### Media encryption
+
+- **AES-256-GCM** for encrypted media/data.
+- File encryption keys are protected within the vault's key hierarchy.
+
+### Key derivation
+
+- **Argon2id** where supported by the security layer.
+- **PBKDF2-HMAC-SHA512** fallback for compatibility.
+
+### Android Keystore
+
+VAIL integrates with Android Keystore for protected key material and can use:
+
+- **StrongBox** on supported devices.
+- **TEE-backed Keystore** on compatible devices when StrongBox is unavailable.
+
+### Application hardening
+
+Release builds use Android production signing and **R8 code shrinking/obfuscation**. Secure-screen controls are also used to reduce exposure through screenshots and screen recording surfaces.
 
 ---
 
 # 🧱 Technology Stack
 
-## Android / Application
+VAIL uses a hybrid React Native + native Android architecture.
 
-- **React Native 0.87**
-- **React 19**
-- **TypeScript**
-- **Kotlin native modules**
+### Application
+
+- React Native 0.87
+- React 19
+- TypeScript
+- Kotlin native modules
 - Android platform APIs
 
-## Security / Storage
+### Storage & security
 
-- Android Keystore
 - AES-256-GCM
 - Argon2id
 - PBKDF2-HMAC-SHA512 fallback
+- Android Keystore
 - SQLCipher
-- Room database
+- Room
 - BIP-39 recovery mnemonic
 
-## State / Local App Data
+### State / local data
 
 - Zustand
 - MMKV
 
-## Cloud / Integration
+### Cloud
 
 - Google Drive
 
-## Build / Release
+### Build
 
 - Gradle / Android Gradle Plugin
 - R8
-- Android App Bundle (AAB)
-- Production signed APK
+- Android App Bundle support
+- Production-signed APK releases
 
 ---
 
 # 🏗️ Architecture Overview
 
-VAIL follows a hybrid React Native + native Android architecture.
-
 ```text
 ┌───────────────────────────────────────┐
 │           React Native UI             │
 │                                       │
-│  Gallery · Albums · Viewer · Settings │
+│ Gallery · Albums · Viewer · Settings │
 └───────────────────┬───────────────────┘
                     │
                     ▼
 ┌───────────────────────────────────────┐
 │       TypeScript Native Bridges       │
 │                                       │
-│   Vault / Media / Album / Security    │
+│   Vault · Media · Album · Security    │
 └───────────────────┬───────────────────┘
                     │
                     ▼
@@ -334,206 +336,114 @@ VAIL follows a hybrid React Native + native Android architecture.
 └───────────────────────────────────────┘
 ```
 
-The UI is built in React Native while security-sensitive Android functionality is implemented through Kotlin native modules.
-
 ---
 
-# 🛡️ Security Design Principles
-
-VAIL is designed around these principles:
+# 🔒 Security Principles
 
 ### Local-first
-Protected media is intended to live primarily in the user's local encrypted vault.
 
-### Encryption by default inside the vault
-Vault media is stored in encrypted form rather than as ordinary gallery files.
+The protected vault is designed primarily around local encrypted storage under the user's control.
 
-### Fail-safe destructive operations
-MOVE deletion is performed only after the encrypted copy has been verified and Android deletion consent has been obtained.
+### Verify before destructive actions
 
-### Integrity verification
-Backup restore and media movement use integrity verification before destructive actions.
+MOVE operations verify encrypted copies before requesting deletion of original device media.
 
-### User-controlled recovery
-Recovery keys and backup flows are intended to remain under the user's control.
+### Integrity before restore
+
+Backup content is validated before the restore process modifies the vault.
 
 ### Defense in depth
-PIN protection, Android Keystore, encryption, secure-screen flags, lockout behavior, and code obfuscation are used together.
+
+Encryption, key derivation, Android Keystore, PIN protection, lockout behavior, secure-screen controls, and application hardening are combined rather than treated as separate guarantees.
+
+### User-controlled recovery
+
+Recovery and backup workflows are intended to keep the user in control of the information needed to recover the vault.
 
 ---
 
-# 🔄 Updating VAIL
+# ✅ VAIL 1.0.1 Validation
 
-VAIL supports normal Android APK updates when the new build is signed with the same application signing identity.
+VAIL 1.0.1 was tested through automated checks and real-device verification.
 
-For official release updates:
+### Automated tests
 
-1. Download the new APK from this repository's **Releases** page.
-2. Open the APK on your Android device.
-3. Choose **Update / Install** when Android prompts you.
-4. Launch VAIL and unlock the vault.
-5. Verify your media and albums after the update.
+- **TypeScript:** PASS
+- **Jest:** 84/84 tests passed
+- **Android unit tests:** 89/89 tests passed
 
-> Do **not** uninstall VAIL before updating if you need the existing local vault data to remain available. Uninstalling an app can remove its private application storage.
+### Real-device verification
 
----
+The production 1.0.1 APK was installed as an update on an Android 15 Vivo test device without uninstalling the existing app.
 
-# 📦 Release Artifacts
+Verified:
 
-Each public release may contain the following artifacts:
-
-| Artifact | Purpose |
-|---|---|
-| `.apk` | Direct Android installation / sideloading |
-| `.aab` | Google Play publishing / store distribution |
-
-For the current direct-download workflow, the **APK** is the primary user-facing artifact.
-
----
-
-# ✅ VAIL 1.0.1 Verification
-
-VAIL 1.0.1 was verified through automated tests, build checks, and device testing.
-
-### Automated verification
-
-- TypeScript: **PASS**
-- Jest: **84/84 tests passed**
-- Android unit tests: **89/89 tests passed**
-
-### Device verification
-
-Verified on an Android 15 Vivo test device:
-
-- Production APK update: **PASS**
-- Existing vault/data preservation: **PASS**
-- Existing encrypted media and albums accessible: **PASS**
-- All / Photos / Videos filters: **PASS**
-- MOVE multiple-item confirmation behavior: **PASS**
-- No application crash during verification: **PASS**
-
----
-
-# 🔎 Release Integrity
-
-For VAIL 1.0.1, the production APK was signed with the official VAIL production signing certificate.
-
-### APK
-
-**File:** `VAIL-v1.0.1.apk`  
-**SHA-256:**
-
-```text
-057D99458A735A99E82E8D689521CE37ED9C46E776FE9FE0887435D6F3DA09FC
-```
-
-### AAB
-
-**Version:** `1.0.1`  
-**SHA-256:**
-
-```text
-89AAD780AC5297081B1A71A21BE993D241695D9F42AC0318B650AC05B33C7B7F
-```
-
-The APK was additionally verified with Android's signing verification tools before release.
+- ✅ Installation/update success.
+- ✅ Existing vault data preserved.
+- ✅ Existing encrypted media and albums accessible.
+- ✅ All / Photos / Videos album filters working.
+- ✅ Multi-item MOVE uses a single confirmation where supported.
+- ✅ No crash during the final verification flow.
 
 ---
 
 # ⚠️ Security & Privacy Notes
 
-VAIL is a privacy-focused application, but no software should be described as completely unbreakable, invisible, or immune to all attacks.
+VAIL is designed as a privacy-focused application, but no application should be considered completely unbreakable or immune to every attack.
 
-Important practical considerations:
+Please keep in mind:
 
-- Keep your master PIN private.
-- Keep your BIP-39 recovery phrase private and backed up securely.
-- Protect the Google account used for encrypted cloud backups.
-- Only install VAIL APKs from the official release repository.
-- Keep Android and the device firmware updated.
-- A compromised or rooted device can weaken the overall security boundary of any application.
-- Physical storage hardware may not guarantee literal zero-overwrite behavior after deletion; VAIL's security model relies on encryption and key destruction rather than claiming guaranteed physical NAND erasure.
-- VAIL has not been independently audited by a third-party security auditor as part of the current public release.
+- Keep your VAIL PIN private.
+- Keep your BIP-39 recovery phrase private and securely backed up.
+- Protect the Google account used for encrypted backups.
+- Download release APKs only from the official repository.
+- Keep Android and device security updates current.
+- A rooted or otherwise compromised device can weaken the security boundary of applications.
+- Software deletion cannot guarantee literal physical zero-overwrite behavior on every storage device; VAIL's design relies on encryption and cryptographic key protection/destruction rather than claiming guaranteed NAND erasure.
+- VAIL has not undergone an independent third-party security audit for the current public release.
 
 ---
 
 # 🚫 What VAIL Does Not Claim
 
-VAIL intentionally does **not** claim:
+VAIL does **not** claim:
 
-- Absolute / unbreakable security.
+- Absolute or unbreakable security.
 - Guaranteed forensic invisibility.
 - Guaranteed physical NAND erasure.
 - Complete protection against a compromised Android device.
-- End-to-end zero-knowledge cloud architecture.
-- A third-party independent security audit that has not been performed.
+- A third-party security audit that has not been performed.
 
-The goal is a strong, practical, privacy-oriented encrypted vault with user-controlled local storage, backup, recovery, and migration.
-
----
-
-# 🧪 Testing Philosophy
-
-VAIL uses multiple layers of verification before a public release:
-
-```text
-Source changes
-     ↓
-TypeScript check
-     ↓
-Jest tests
-     ↓
-Android unit tests
-     ↓
-Production build
-     ↓
-Signature / version verification
-     ↓
-Real-device upgrade test
-     ↓
-Manual feature QA
-     ↓
-Public release
-```
-
-This repository is primarily for distributing the resulting production builds rather than for serving as the application source tree.
+The objective is a strong, practical, privacy-oriented encrypted vault with user-controlled local storage, backup, recovery, organization, and migration.
 
 ---
 
-# 🗺️ Project Direction
+# 📋 Release History
 
-VAIL is being developed as a premium personal privacy utility focused on:
+| Version | Highlights |
+|---|---|
+| **1.0.1** | Batch MOVE confirmation, Album All/Photos/Videos filters, safer MOVE verification, improved filtered selection |
+| **1.0.0** | Initial production release of the VAIL encrypted media vault |
 
-- Better vault organization.
-- Safer media operations.
-- Reliable encrypted backups and recovery.
-- Practical device migration.
-- Privacy-oriented UX.
-- Stronger Android security integration.
-
-New releases may refine existing security and UX behavior without changing VAIL's local-first design philosophy.
+See the [**Releases**](../../releases) page for all official builds.
 
 ---
 
-# 📜 License
+# 🧑‍💻 About This Repository
 
-See the project's source repository for the applicable license and source-availability information.
+This repository is intended for **public distribution of official VAIL Android builds**.
 
----
+The application source code is maintained separately from this release repository.
 
-# 👨‍💻 Project
+### Official repositories
 
-**VAIL — Encrypted Media Vault for Android**
-
-Developed by **Aryan Kushwaha**.
-
-Official source repository: `aryanKDev/VAIL`  
-Official release repository: `aryanKDev/VAIL-Releases`
+- **Source:** [aryanKDev/VAIL](https://github.com/aryanKDev/VAIL)
+- **Releases:** [aryanKDev/VAIL-Releases](https://github.com/aryanKDev/VAIL-Releases)
 
 ---
 
-## ⭐ Support the Project
+# ⭐ Support VAIL
 
-If VAIL is useful to you, consider giving the release repository a ⭐ on GitHub and sharing feedback through the project's official channels.
+If you use VAIL and find it useful, consider giving the repository a ⭐ on GitHub and sharing feedback through the project's official channels.
 
 **VAIL — Keep your media private. Keep control in your hands. 🔐**
