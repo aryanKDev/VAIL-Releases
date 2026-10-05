@@ -35,7 +35,7 @@ Download the latest official VAIL APK directly from the GitHub Releases page.
 
 ### 🚀 VAIL 1.0.1
 
-[⬇️ **Download VAIL 1.0.1 APK**](https://github.com/aryanKDev/VAIL-Releases/releases/latest/download/VAIL-v1.0.1.apk)
+[⬇️ **Download VAIL 1.0.1 APK**](https://github.com/aryanKDev/VAIL-Releases/releases/download/v1.0.1/app-release.apk)
 
 Or view all available releases:
 
